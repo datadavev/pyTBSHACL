@@ -1,5 +1,5 @@
 # pyTBSHACL
-Python wrapper for TopBraid's SHACL validator 
+Python wrapper for TopBraid's SHACL validator.
 
 PySHACL for RDFLib dooes not currently implement soome of the [advanced SHACL functionality](https://www.w3.org/TR/shacl-af/) 
 which is available with [TopBraid's command line validator](https://github.com/TopQuadrant/shacl). `pyTBSHACL` 
