@@ -1,0 +1,6 @@
+# Adapted from https://book.validatingrdf.com/bookHtml011.html#sec173
+@prefix ex: <http://example.org/> .
+ex:alice a     ex:Teacher ;      #Passes as a :AlgebraTeacher
+    ex:teaches ex:algebra ;
+    ex:field   ex:Mathematics .
+

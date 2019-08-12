@@ -1,0 +1,4 @@
+# Adapted from https://book.validatingrdf.com/bookHtml011.html#sec173
+@prefix ex: <http://example.org/> .
+ex:bob a        ex:Teacher ;        #Fails as a ex:AlgebraTeacher
+    ex:teaches ex:algebra ;         #No value for ex:field
