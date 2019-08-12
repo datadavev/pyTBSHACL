@@ -20,7 +20,7 @@ def reportTextFromGraph(result_ttl):
     CF = rdflib.URIRef("http://www.w3.org/ns/shacl#conforms")
     conforms = False
     for subject, predicate, obj in rg:
-        print(f"{subject}  {predicate}  {obj}")
+        #print(f"{subject}  {predicate}  {obj}")
         if predicate == CF:
             conforms = (obj.lower() in ['true', ])
     res = "CONFORMS = " + str(conforms)
