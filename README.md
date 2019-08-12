@@ -7,3 +7,6 @@ implements a python wrapper for the TopBraid validator tool to help simplify int
 needing that functionality. It is anticipated that this module will become redundant as adavanced capabilities 
 are progeressively added to PySHACL.
 
+## Status
+
+Currently (2019-08-11) an initial draft implementation.
