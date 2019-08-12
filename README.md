@@ -38,14 +38,14 @@ SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 @prefix ex:    <http://example.org/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
-[ a       <http://www.w3.org/ns/shacl#ValidationReport> ;
-  <http://www.w3.org/ns/shacl#conforms>
-          true
+[ a            sh:ValidationReport ;
+  sh:conforms  true
 ] .
 ===
 CONFORMS = True
@@ -59,29 +59,22 @@ SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 @prefix ex:    <http://example.org/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
-[ a       <http://www.w3.org/ns/shacl#ValidationReport> ;
-  <http://www.w3.org/ns/shacl#conforms>
-          false ;
-  <http://www.w3.org/ns/shacl#result>
-          [ a       <http://www.w3.org/ns/shacl#ValidationResult> ;
-            <http://www.w3.org/ns/shacl#focusNode>
-                    ex:bob ;
-            <http://www.w3.org/ns/shacl#resultMessage>
-                    "Missing expected value ex:Mathematics" ;
-            <http://www.w3.org/ns/shacl#resultPath>
-                    ex:field ;
-            <http://www.w3.org/ns/shacl#resultSeverity>
-                    <http://www.w3.org/ns/shacl#Violation> ;
-            <http://www.w3.org/ns/shacl#sourceConstraintComponent>
-                    <http://www.w3.org/ns/shacl#HasValueConstraintComponent> ;
-            <http://www.w3.org/ns/shacl#sourceShape>
-                    []
-          ]
+[ a            sh:ValidationReport ;
+  sh:conforms  false ;
+  sh:result    [ a                             sh:ValidationResult ;
+                 sh:focusNode                  ex:bob ;
+                 sh:resultMessage              "Missing expected value ex:Mathematics" ;
+                 sh:resultPath                 ex:field ;
+                 sh:resultSeverity             sh:Violation ;
+                 sh:sourceConstraintComponent  sh:HasValueConstraintComponent ;
+                 sh:sourceShape                []
+               ]
 ] .
 ===
 CONFORMS = False
@@ -95,15 +88,15 @@ SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 @prefix :      <http://schema.org/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix xml:   <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
-[ a       <http://www.w3.org/ns/shacl#ValidationReport> ;
-  <http://www.w3.org/ns/shacl#conforms>
-          true
+[ a            sh:ValidationReport ;
+  sh:conforms  true
 ] .
 ===
 CONFORMS = True
@@ -118,29 +111,22 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 @prefix schema: <http://schema.org/> .
 @prefix ex:    <http://example.org/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
-[ a       <http://www.w3.org/ns/shacl#ValidationReport> ;
-  <http://www.w3.org/ns/shacl#conforms>
-          false ;
-  <http://www.w3.org/ns/shacl#result>
-          [ a       <http://www.w3.org/ns/shacl#ValidationResult> ;
-            <http://www.w3.org/ns/shacl#focusNode>
-                    ex:dataset2_encoding ;
-            <http://www.w3.org/ns/shacl#resultMessage>
-                    "schema:contentUrl is required for the encoding property of a Dataset" ;
-            <http://www.w3.org/ns/shacl#resultPath>
-                    schema:contentUrl ;
-            <http://www.w3.org/ns/shacl#resultSeverity>
-                    <http://www.w3.org/ns/shacl#Violation> ;
-            <http://www.w3.org/ns/shacl#sourceConstraintComponent>
-                    <http://www.w3.org/ns/shacl#MinCountConstraintComponent> ;
-            <http://www.w3.org/ns/shacl#sourceShape>
-                    []
-          ]
+[ a            sh:ValidationReport ;
+  sh:conforms  false ;
+  sh:result    [ a                             sh:ValidationResult ;
+                 sh:focusNode                  ex:dataset2_encoding ;
+                 sh:resultMessage              "schema:contentUrl is required for the encoding property of a Dataset" ;
+                 sh:resultPath                 schema:contentUrl ;
+                 sh:resultSeverity             sh:Violation ;
+                 sh:sourceConstraintComponent  sh:MinCountConstraintComponent ;
+                 sh:sourceShape                []
+               ]
 ] .
 ===
 CONFORMS = False
