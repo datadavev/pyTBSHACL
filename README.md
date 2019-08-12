@@ -25,7 +25,7 @@ Currently (2019-08-11) an initial draft implementation, tested on OS X only.
 
 ## Example
 
-Folloowing are run from the `examples` folder.
+Following are run from the `examples` folder.
 
 Valid data:
 
