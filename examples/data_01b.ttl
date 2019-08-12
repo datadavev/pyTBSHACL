@@ -1,0 +1,25 @@
+@prefix schema: <http://schema.org/> .
+@prefix ex: <http://example.org/> .
+
+ex:my_data                # Valid
+    a schema:Dataset ;
+    schema:encoding [
+        a schema:MediaObject ;
+        schema:contentUrl "https://example.org/metadata.xml" ;
+    ]
+.
+
+ex:my_data_2              # invalid, contentURL instead of contentUrl
+    a schema:Dataset ;
+    schema:encoding ex:dataset2_encoding ;
+.
+
+ex:dataset2_encoding      # instance of MediaObject referenced from ex:my_data2
+    a schema:MediaObject ;
+    schema:contentURL "https://example.org/metadata.xml" ;
+.
+
+ex:unused_encoding        # invalid but not tested as it is not part of a schema:Dataset
+    a schema:MediaObject ;
+    schema:contentURL "https://example.org/metadata.xml" ;
+.
