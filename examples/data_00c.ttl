@@ -1,5 +1,6 @@
 # Adapted from https://book.validatingrdf.com/bookHtml011.html#sec173
 @prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 
 ex:mathclass a ex:Classroom ;
     ex:bob [                            # Bob passes

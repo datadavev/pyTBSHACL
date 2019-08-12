@@ -1,5 +1,6 @@
 @prefix schema: <http://schema.org/> .
 @prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 
 ex:my_data                # Valid
     a schema:Dataset ;

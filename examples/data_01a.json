@@ -1,6 +1,7 @@
 {
     "@context":{
-        "@vocab": "http://schema.org/"
+        "@vocab": "http://schema.org/",
+        "sh":"http://www.w3.org/ns/shacl#"
     },
     "@id":"http://example.org/my_data",
     "@type": "Dataset",
