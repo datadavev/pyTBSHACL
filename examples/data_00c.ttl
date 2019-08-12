@@ -1,0 +1,15 @@
+# Adapted from https://book.validatingrdf.com/bookHtml011.html#sec173
+@prefix ex: <http://example.org/> .
+
+ex:mathclass a ex:Classroom ;
+    ex:bob [                            # Bob passes
+        a           ex:Teacher ;
+        ex:teaches  ex:algebra ;
+        ex:field    ex:Mathematics ;
+    ] ;
+    ex:jen [                            # jen does not validate
+        a           ex:Teacher ;
+        ex:teaches  ex:algebra ;
+        ex:field    ex:Science ;        # field is Science instead of Mathematics
+    ]
+.
