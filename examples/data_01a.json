@@ -1,0 +1,15 @@
+{
+    "@context":{
+        "@vocab": "http://schema.org/"
+    },
+    "@id":"http://example.org/my_data",
+    "@type": "Dataset",
+
+    "encoding":{
+        "@type": "MediaObject",
+        "contentUrl":"https://example.org/link/to/iso.xml",
+        "encodingFormat":"http://www.isotc211.org/2005/gmd",
+        "description":"ISO TC211 XML rendering of metadata.",
+        "dateModified":"2019-06-12T14:44:15Z"
+    }
+}
