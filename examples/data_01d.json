@@ -1,0 +1,29 @@
+{
+    "@context":{
+        "@vocab": "http://schema.org/",
+        "sh":"http://www.w3.org/ns/shacl#",
+        "ex": "http://example.org/"
+    },
+    "@id":"ex:my_data",
+    "@type": "Dataset",
+    "description": "Deliberately broken Dataset structure",
+
+    "encoding":[
+      {
+        "@id": "ex:media_encoding_1",
+        "@type": "MediaObject",
+        "contentUrl":"https://example.org/link/to/iso.xml",
+        "XencodingFormat":"http://www.isotc211.org/2005/gmd",
+        "description":"ISO TC211 XML rendering of metadata.",
+        "dateModified":"2019-06-12T14:44:15Z"
+      },
+      {
+        "@id": "ex:media_encoding_2",
+        "@type": "MediaObject",
+        "XcontentUrl":"https://example.org/link/to/dc.xml",
+        "XencodingFormat":"http://ns.dataone.org/metadata/schema/onedcx/v1.0",
+        "description":"Dublin Core XML rendering of metadata.",
+        "dateModified":"2019-06-12T14:44:15Z"
+      }
+    ]
+}
