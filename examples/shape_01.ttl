@@ -32,9 +32,20 @@ d1:MediaObjectShape
             }
         """ ;
     ] ;
-    sh:property [
-        sh:path schema:contentUrl ;
-        sh:minCount 1 ;
-        sh:message "schema:contentUrl is required for the encoding property of a Dataset"
-    ] .
+    sh:property d1:contentUrlConstraint0 ;
+    sh:property d1:contentUrlConstraint1 ;
+    sh:property d1:encodingFormatConstraint0 ;
+.
 
+d1:contentUrlConstraint0
+    sh:path schema:contentUrl ;
+    sh:minCount 1 ;
+    sh:message "A schema:contentUrl is required for the encoding property of a Dataset" ;
+ .
+
+
+d1:encodingFormatConstraint0
+    sh:path schema:encodingFormat ;
+    sh:minCount 1 ;
+    sh:mssage "A schema:encodingFormat property is required for the enencoding property of a Dataset" ;
+.
