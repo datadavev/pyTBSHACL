@@ -12,7 +12,11 @@ become redundant as adavanced capabilities are progressively added to PySHACL.
 
 ## Status
 
-Currently (2019-08-12) an initial draft implementation, tested on OS X only.
+Version 0.0.1 (2019-08-21):
+
+Initial complete implementation. Shape files must be in turtle, data files
+may be in any RDF format supported by RDFLib. Output in turtle, plain text,
+or json. Tested on OS X only.
 
 
 ## Installation
