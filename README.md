@@ -1,5 +1,5 @@
 # pyTBSHACL
-Python wrapper for TopBraid's SHACL validator.
+Python wrapper for TopQuadrant's TopBraid SHACL validator.
 
 [PySHACL](https://github.com/RDFLib/pySHACL) for RDFLib 
 [does not currently implement](https://github.com/RDFLib/pySHACL/blob/master/FEATURES.md) 
@@ -8,7 +8,7 @@ which is available with [TopBraid's command line validator](https://github.com/T
 `pyTBSHACL` implements a python wrapper for the TopBraid validator tool 
 to help simplify integration with python projects 
 needing that functionality. It is anticipated that this module will 
-become redundant as adavanced capabilities are progeressively added to PySHACL.
+become redundant as adavanced capabilities are progressively added to PySHACL.
 
 ## Status
 
@@ -17,14 +17,18 @@ Currently (2019-08-12) an initial draft implementation, tested on OS X only.
 
 ## Installation
 
-1. Download and install the TopBraid SHACL validator, following guidance at:
-
-  https://github.com/TopQuadrant/shacl
+1\. Download and install the TopBraid SHACL validator, following guidance at:
+   
+   https://github.com/TopQuadrant/shacl
   
-2. Set the `SHACLROOT` environment variable to the absolute path to the
+  Optionally build the validator from source, see "Building the Validator 
+  from Source" below.
+  
+2\. Set the `SHACLROOT` environment variable to the absolute path to the
 `bin` folder of the TopBraid SHACL validator distribution.
 
-3. Clone this repo, cd to the folder, then run: `pip install -e .`
+3\. `pip install -U pyTBSHACL` or clone this repo, cd to the folder, 
+then run: `pip install -e .`
 
 ## Example
 
@@ -34,9 +38,6 @@ Valid data:
 
 ```
 $ shacl -d data_00a.ttl -s shape_00.ttl
-SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 @prefix ex:    <http://example.org/> .
 @prefix sh:    <http://www.w3.org/ns/shacl#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -47,17 +48,12 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 [ a            sh:ValidationReport ;
   sh:conforms  true
 ] .
-===
-CONFORMS = True
 ```
 
 Invalid data:
 
 ```
 $ shacl -d data_00b.ttl -s shape_00.ttl
-SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 @prefix ex:    <http://example.org/> .
 @prefix sh:    <http://www.w3.org/ns/shacl#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -69,24 +65,36 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
   sh:conforms  false ;
   sh:result    [ a                             sh:ValidationResult ;
                  sh:focusNode                  ex:bob ;
-                 sh:resultMessage              "Missing expected value ex:Mathematics" ;
+                 sh:resultMessage              "Does not have value ex:Mathematics" ;
                  sh:resultPath                 ex:field ;
                  sh:resultSeverity             sh:Violation ;
                  sh:sourceConstraintComponent  sh:HasValueConstraintComponent ;
                  sh:sourceShape                []
                ]
 ] .
-===
-CONFORMS = False
 ```
+
+Invalid data with text output:
+
+```
+$ shacl -d data_00b.ttl -s shape_00.ttl -of text
+Validation Report
+Conforms: False
+Results (1):
+Results for focus node http://example.org/bob:
+  Path: http://example.org/field
+  Severity: Violation
+  Constraint violation in HasValueConstraintComponent
+  Message: Does not have value ex:Mathematics
+  Source shape: ub2bL15C48
+```
+
+
 
 Valid Dataset with encoding in json-ld:
 
 ```
 $ shacl -d data_01a.json -df json-ld  -s shape_01.ttl
-SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 @prefix :      <http://schema.org/> .
 @prefix sh:    <http://www.w3.org/ns/shacl#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -98,17 +106,12 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 [ a            sh:ValidationReport ;
   sh:conforms  true
 ] .
-===
-CONFORMS = True
 ```
 
 Invalid Dataset encoding:
 
 ```
 $ shacl -d data_01b.ttl -s shape_01.ttl
-SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 @prefix schema: <http://schema.org/> .
 @prefix ex:    <http://example.org/> .
 @prefix sh:    <http://www.w3.org/ns/shacl#> .
@@ -121,13 +124,56 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
   sh:conforms  false ;
   sh:result    [ a                             sh:ValidationResult ;
                  sh:focusNode                  ex:dataset2_encoding ;
-                 sh:resultMessage              "schema:contentUrl is required for the encoding property of a Dataset" ;
+                 sh:resultMessage              "A schema:contentUrl is required for the encoding property of a Dataset" ;
                  sh:resultPath                 schema:contentUrl ;
                  sh:resultSeverity             sh:Violation ;
                  sh:sourceConstraintComponent  sh:MinCountConstraintComponent ;
-                 sh:sourceShape                []
+                 sh:sourceShape                <http://ns.dataone.org/schema/2019/08/SO/Dataset#contentUrlConstraint0>
+               ] ;
+  sh:result    [ a                             sh:ValidationResult ;
+                 sh:focusNode                  ex:dataset2_encoding ;
+                 sh:resultMessage              "Property needs to have at least 1 values, but found 0" ;
+                 sh:resultPath                 schema:encodingFormat ;
+                 sh:resultSeverity             sh:Violation ;
+                 sh:sourceConstraintComponent  sh:MinCountConstraintComponent ;
+                 sh:sourceShape                <http://ns.dataone.org/schema/2019/08/SO/Dataset#encodingFormatConstraint0>
+               ] ;
+  sh:result    [ a                             sh:ValidationResult ;
+                 sh:focusNode                  []  ;
+                 sh:resultMessage              "Property needs to have at least 1 values, but found 0" ;
+                 sh:resultPath                 schema:encodingFormat ;
+                 sh:resultSeverity             sh:Violation ;
+                 sh:sourceConstraintComponent  sh:MinCountConstraintComponent ;
+                 sh:sourceShape                <http://ns.dataone.org/schema/2019/08/SO/Dataset#encodingFormatConstraint0>
                ]
 ] .
-===
-CONFORMS = False
+```
+
+
+## Building the Validator from Source
+
+The most recent version of the TopBraid shacl validator can be built 
+from source as follows:
+
+1. Clone the repository:
+
+```
+git clone https://github.com/TopQuadrant/shacl
+```
+
+2. Build the package:
+
+```
+cd shacl
+mvn clean package 
+```
+
+3. Deploy the built package. The package is a .zip file in the `target` 
+folder named like ``. Unzip that file to the desired installation
+location, e.g.:
+
+```
+cd ~/bin
+unzip ~/git/shacl/target/shacl-1.x.y-SNAPSHOT-bin.zip
+export SHACLROOT="~/git/shacl/target/shacl-1.x.y-SNAPSHOT/bin"
 ```
